@@ -1,17 +1,32 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
-import { FileVideo } from 'lucide-react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import AuthLayout from './components/ui/auth/layout'
+import Login from './pages/auth/Login'
+import Register from './pages/auth/register'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <AuthLayout />,
+      children: [
+        {
+          path:'/Login',
+          element:<Login />
+        },
+        {
+          path:'/Register',
+          element:<Register />
+        }
+      ]
+    }
+  ])
 
   return (
     <div>
-      <h1>
-        hello world
-      </h1>
+      <RouterProvider router={router}/>
     </div>
   )
 }
