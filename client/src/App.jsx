@@ -15,12 +15,24 @@ import ShoppingAccount from "./pages/Shopping-View/Account";
 import ShoppingCheckout from "./pages/Shopping-View/Checkout";
 import ShoppingHome from "./pages/Shopping-View/Home";
 import ShoppingListing from "./pages/Shopping-View/Listing";
+import CheckAuth from "./components/Common/Check-Auth";
+import UnauthPage from "./pages/unauth-page";
 
 function App() {
+  const isAuthenticated = true;
+  const user = {
+    name : "adnan",
+    role: "user"
+  };
+
   const router = createBrowserRouter([
     {
-      path: "/",
-      element: <AuthLayout />,
+      path: "/auth",
+      element: (
+        <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+          <AuthLayout />
+        </CheckAuth>
+      ),
       children: [
         {
           path: "login",
@@ -34,7 +46,11 @@ function App() {
     },
     {
       path: "/admin",
-      element: <AdminLayout />,
+      element: (
+        <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+          <AdminLayout />
+        </CheckAuth>
+      ),
       children: [
         {
           path: "dashboard",
@@ -55,23 +71,27 @@ function App() {
       ],
     },
     {
-      path: "Shop",
-      element: <ShoppingLayout />,
+      path: "shop",
+      element: (
+        <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+          <ShoppingLayout />
+        </CheckAuth>
+      ),
       children: [
         {
-          path: "Home",
+          path: "home",
           element: <ShoppingHome />,
         },
         {
-          path: "Listing",
+          path: "listing",
           element: <ShoppingListing />,
         },
         {
-          path: "Checkout",
+          path: "checkout",
           element: <ShoppingCheckout />,
         },
         {
-          path: "Account",
+          path: "account",
           element: <ShoppingAccount />,
         },
       ],
@@ -79,6 +99,10 @@ function App() {
     {
       path: "*",
       element: <NotFound />,
+    },
+    {
+      path: "/unauth-page",
+      element: <UnauthPage />,
     },
   ]);
 
