@@ -29,18 +29,6 @@ const registerUser = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
-  const { userName, email, password } = req.body;
 
-  try {
-  } catch (error) {
-    console.log(error);
-
-    res.status(500).json({
-      success: false,
-      massege: "Some error occured",
-    });
-  }
-};
 
 export { registerUser };

@@ -9,7 +9,7 @@ const initialState = {
   password: '',
 }
 
-function Register() {
+function Login() {
 
   const [formData , setFormData] = useState(initialState)
 
@@ -43,4 +43,4 @@ function Register() {
   )
 }
 
-export default Register
+export default Login

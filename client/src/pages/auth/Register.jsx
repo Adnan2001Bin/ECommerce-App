@@ -13,6 +13,8 @@ function Register() {
 
   const [formData , setFormData] = useState(initialState)
 
+  console.log(formData)
+
   function onSubmit() {
     
   }
