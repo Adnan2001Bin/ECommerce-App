@@ -17,10 +17,12 @@ import ShoppingHome from "./pages/Shopping-View/Home";
 import ShoppingListing from "./pages/Shopping-View/Listing";
 import CheckAuth from "./components/Common/Check-Auth";
 import UnauthPage from "./pages/unauth-page";
+import { useSelector } from "react-redux";
 
 function App() {
   const isAuthenticated = false;
   const user = null
+
 
   const router = createBrowserRouter([
     {

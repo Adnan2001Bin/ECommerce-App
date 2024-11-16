@@ -15,10 +15,11 @@ const initialState = {
 function Login() {
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
+  const { toast } = useToast();
+
 
   function onSubmit(event) {
     event.preventDefault();
-    const { toast } = useToast();
 
     dispatch(loginUser(formData)).then((data) => {
       if (data?.payload?.success) {
