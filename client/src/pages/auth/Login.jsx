@@ -1,29 +1,46 @@
-import CommonForm from '@/components/Common/Form'
-import { loginFormControls } from '@/Config'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import CommonForm from "@/components/Common/Form";
+import { loginFormControls } from "@/Config";
+import { useToast } from "@/hooks/use-toast";
+import { loginUser } from "@/store/auth-slice";
+
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const initialState = {
-  useName : '' ,
-  email : '',
-  password: '',
-}
+  email: "",
+  password: "",
+};
 
 function Login() {
+  const [formData, setFormData] = useState(initialState);
+  const dispatch = useDispatch();
 
-  const [formData , setFormData] = useState(initialState)
+  function onSubmit(event) {
+    event.preventDefault();
+    const { toast } = useToast();
 
-  function onSubmit() {
-    
+    dispatch(loginUser(formData)).then((data) => {
+      if (data?.payload?.success) {
+        toast({
+          title: data?.payload?.message,
+        });
+      } else {
+        toast({
+          title: data?.payload?.message,
+          variant: "destructive",
+        });
+      }
+    });
   }
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
-        Sign in to your account
+          Sign in to your account
         </h1>
         <p className="mt-2">
-        Don't have an account
+          Don't have an account
           <Link
             className="font-medium ml-2 text-primary hover:underline"
             to="/auth/register"
@@ -40,7 +57,7 @@ function Login() {
         onSubmit={onSubmit}
       />
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
