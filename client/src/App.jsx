@@ -20,9 +20,9 @@ import UnauthPage from "./pages/unauth-page";
 import { useSelector } from "react-redux";
 
 function App() {
-  const isAuthenticated = false;
-  const user = null
 
+
+  const {user , isAuthenticated} = useSelector(state => state.auth)
 
   const router = createBrowserRouter([
     {
