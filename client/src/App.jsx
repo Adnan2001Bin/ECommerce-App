@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "./components/auth/layout";
@@ -17,12 +17,22 @@ import ShoppingHome from "./pages/Shopping-View/Home";
 import ShoppingListing from "./pages/Shopping-View/Listing";
 import CheckAuth from "./components/Common/Check-Auth";
 import UnauthPage from "./pages/unauth-page";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { checkAuth } from "./store/auth-slice";
+import { Skeleton } from "./components/ui/skeleton";
 
 function App() {
 
 
-  const {user , isAuthenticated} = useSelector(state => state.auth)
+  const {user , isAuthenticated , isLoading} = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(checkAuth())
+  } , [dispatch])
+
+
+  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
 
   const router = createBrowserRouter([
     {

@@ -69,8 +69,7 @@ const loginUser = async (req, res) => {
       "CLIENT_SECRET_KEY",
       {
         expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
-      },
-
+      }
     );
 
     res.cookie("token", token, { httpOnly: true, secure: false }).json({
@@ -93,4 +92,33 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { registerUser,loginUser };
+// logout
+const logoutUser = (req, res) => {
+  res.clearCookie("token").json({
+    success: true,
+    message: "Logged out successfully!",
+  });
+};
+
+//auth middleware
+const authMiddleware = async (req, res, next) => {
+  const token = req.cookies.token;
+
+  if (!token)
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorised user!",
+    });
+
+  try {
+    const decoded = jwt.verify(token, "CLIENT_SECRET_KEY");
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      message: "Unauthorised user!",
+    });
+  }
+};
+export { registerUser, loginUser, logoutUser ,authMiddleware};
