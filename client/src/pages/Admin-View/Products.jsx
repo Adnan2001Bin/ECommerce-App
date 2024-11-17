@@ -30,8 +30,12 @@ function AdminProducts() {
 
   const [imageFile, setImageFile] = useState(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [imageLoadingState, setImageLoadingState] = useState(false);
+
 
   function onSubmit() {}
+  console.log(formData, "productList");
+
   return (
     <Fragment>
       <div className="mb-5 w-full flex justify-end">
@@ -57,6 +61,7 @@ function AdminProducts() {
               setImageFile={setImageFile}
               uploadedImageUrl={uploadedImageUrl}
               setuploadedImageUrl={setUploadedImageUrl}
+              setImageLoadingState={setImageLoadingState}
             />
             <div>
               <CommonForm
