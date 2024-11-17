@@ -70,7 +70,7 @@ function App() {
           element: <AdminFeatures />,
         },
         {
-          path: "order",
+          path: "orders",
           element: <AdminOrder />,
         },
         {
