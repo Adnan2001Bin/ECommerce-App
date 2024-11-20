@@ -60,10 +60,10 @@ function AdminProducts() {
               imageFile={imageFile}
               setImageFile={setImageFile}
               uploadedImageUrl={uploadedImageUrl}
-              setuploadedImageUrl={setUploadedImageUrl}
+              setUploadedImageUrl={setUploadedImageUrl}
               setImageLoadingState={setImageLoadingState}
             />
-            <div>
+            <div className="py-6">
               <CommonForm
                 onSubmit={onSubmit}
                 formData={formData}
