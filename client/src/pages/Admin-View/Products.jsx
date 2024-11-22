@@ -38,35 +38,36 @@ function AdminProducts() {
   const [currentEditedId, setCurrentEditedId] = useState(null);
 
   const { productList } = useSelector((state) => state.adminProducts);
-  const dispatch = useDispatch()
-  const {toast} = useToast()
-
+  const dispatch = useDispatch();
+  const { toast } = useToast();
 
   function onSubmit(event) {
     event.preventDefault();
 
-    dispatch(addNewProduct({
-      ...formData,
-      image: uploadedImageUrl
-    })).then((data) => {
-      console.log(data)
+    dispatch(
+      addNewProduct({
+        ...formData,
+        image: uploadedImageUrl,
+      })
+    ).then((data) => {
+      console.log(data);
 
       if (data?.payload?.success) {
-        dispatch(fetchAllProducts())
-        setOpenCreateProductsDialog(false)
-        setImageFile(null)
-        setFormData(initialFormData)
+        dispatch(fetchAllProducts());
+        setOpenCreateProductsDialog(false);
+        setImageFile(null);
+        setFormData(initialFormData);
         toast({
-          title: 'Product add successfully'
-        })
+          title: "Product add successfully",
+        });
       }
-    })
+    });
   }
 
   useEffect(() => {
-    dispatch(fetchAllProducts())
-  },[dispatch])
-  console.log(productList, uploadedImageUrl,"productList");
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
+  console.log(productList, uploadedImageUrl, "productList");
 
   return (
     <Fragment>
@@ -80,8 +81,10 @@ function AdminProducts() {
         {productList && productList.length > 0
           ? productList.map((productItem) => (
               <AdminProductTile
+                setOpenCreateProductsDialog={setOpenCreateProductsDialog}
                 product={productItem}
-
+                setCurrentEditedId={setCurrentEditedId}
+                setFormData={setFormData}
               />
             ))
           : null}
@@ -105,7 +108,8 @@ function AdminProducts() {
               uploadedImageUrl={uploadedImageUrl}
               setUploadedImageUrl={setUploadedImageUrl}
               setImageLoadingState={setImageLoadingState}
-              imageLoadingState = {imageLoadingState}
+              imageLoadingState={imageLoadingState}
+              isEditMode = {currentEditedId !== null}
             />
             <div className="py-6">
               <CommonForm
