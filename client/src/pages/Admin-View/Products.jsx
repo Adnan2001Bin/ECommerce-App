@@ -1,4 +1,5 @@
 import ProductImageUpload from "@/components/Admin-View/image-upload";
+import AdminProductTile from "@/components/Admin-View/product-tile";
 import CommonForm from "@/components/Common/Form";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,6 +35,8 @@ function AdminProducts() {
   const [imageFile, setImageFile] = useState(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [imageLoadingState, setImageLoadingState] = useState(false);
+  const [currentEditedId, setCurrentEditedId] = useState(null);
+
   const { productList } = useSelector((state) => state.adminProducts);
   const dispatch = useDispatch()
   const {toast} = useToast()
@@ -71,6 +74,17 @@ function AdminProducts() {
         <Button onClick={() => setOpenCreateProductsDialog(true)}>
           Add New Product
         </Button>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
+        {productList && productList.length > 0
+          ? productList.map((productItem) => (
+              <AdminProductTile
+                product={productItem}
+
+              />
+            ))
+          : null}
       </div>
 
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
