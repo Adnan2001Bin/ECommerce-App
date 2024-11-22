@@ -12,6 +12,7 @@ import { addProductFormElements } from "@/Config";
 import { useToast } from "@/hooks/use-toast";
 import {
   addNewProduct,
+  deleteProduct,
   editProduct,
   fetchAllProducts,
 } from "@/store/admin/products-slice";
@@ -84,6 +85,23 @@ function AdminProducts() {
         });
   }
 
+  function handleDelete(getCurrentProductId){
+    dispatch(deleteProduct(getCurrentProductId)).then((data) => {
+      if (data?.payload?.success) {
+        dispatch(fetchAllProducts());
+      }
+    });
+  }
+
+  
+  function isFormValid() {
+    return Object.keys(formData)
+      .filter((currentKey) => currentKey !== "averageReview")
+      .map((key) => formData[key] !== "")
+      .every((item) => item);
+  }
+
+
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
@@ -105,6 +123,7 @@ function AdminProducts() {
                 product={productItem}
                 setCurrentEditedId={setCurrentEditedId}
                 setFormData={setFormData}
+                handleDelete={handleDelete}
               />
             ))
           : null}
@@ -143,6 +162,7 @@ function AdminProducts() {
                 formControls={addProductFormElements}
                 buttonText={currentEditedId !== null ? "Edit" : "Add"}
                 className="py-6"
+                isBtnDisabled={!isFormValid()}
               />
             </div>
           </SheetContent>
