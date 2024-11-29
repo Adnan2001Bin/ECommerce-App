@@ -13,7 +13,7 @@ function ShoppingProductTile({
 
   return (
     <Card className="w-full max-w-sm mx-auto">
-      <div>
+      <div onClick={() => handleGetProductDetails(product?._id)} >
         <div className="relative">
           <img
             src={product?.image}
