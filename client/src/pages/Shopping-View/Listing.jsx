@@ -80,11 +80,14 @@ function ShoppingListing() {
   }, [filters]);
 
   useEffect(() => {
-    dispatch(fetchAllFilteredProducts());
-  }, [dispatch]);
+    if (filters !== null && sort !== null)
+      dispatch(
+        fetchAllFilteredProducts({ filterParams: filters, sortParams: sort })
+      );
+  }, [dispatch,sort , filters]);
   
 
-  console.log(filters,searchParams, "productlist");
+  console.log(filters, "productlist");
 
 
 
