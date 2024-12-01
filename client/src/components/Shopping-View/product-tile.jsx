@@ -9,11 +9,9 @@ function ShoppingProductTile({
   handleGetProductDetails,
   handleAddtoCart,
 }) {
-  
-
   return (
     <Card className="w-full max-w-sm mx-auto">
-      <div onClick={() => handleGetProductDetails(product?._id)} >
+      <div onClick={() => handleGetProductDetails(product?._id)}>
         <div className="relative">
           <img
             src={product?.image}
@@ -62,12 +60,17 @@ function ShoppingProductTile({
               ) : null}
             </div>
           </CardContent>
-
-          <CardFooter>
-            <Button className="w-full">Add to cart</Button>
-          </CardFooter>
         </div>
       </div>
+
+      <CardFooter>
+          <Button
+            onClick={() => handleAddtoCart(product?._id)}
+            className="w-full"
+          >
+            Add to cart
+          </Button>
+      </CardFooter>
     </Card>
   );
 }
