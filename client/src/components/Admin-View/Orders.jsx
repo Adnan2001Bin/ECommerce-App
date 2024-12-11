@@ -1,13 +1,13 @@
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Table, TableBody, TableCell, TableHead, TableRow } from "../ui/table";
-import { Button } from "../ui/button";
+import React from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Table, TableBody, TableCell, TableHead, TableRow } from '../ui/table'
+import { Button } from '../ui/button'
 
-function ShoppingOrders() {
+function AdminOrdersView() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Order History</CardTitle>
+        <CardTitle>All Orders</CardTitle>
       </CardHeader>
 
       <CardContent>
@@ -38,7 +38,7 @@ function ShoppingOrders() {
         </Table>
       </CardContent>
     </Card>
-  );
+  )
 }
 
-export default ShoppingOrders;
+export default AdminOrdersView
